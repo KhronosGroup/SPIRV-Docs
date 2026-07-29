@@ -1,4 +1,7 @@
 version = 1
+SPDX-PackageName = "SPIRV-Docs"
+SPDX-PackageSupplier = "The Khronos Group, Inc."
+SPDX-PackageDownloadLocation = "https://github.com/KhronosGroup/SPIRV-Docs"
 
 [[annotations]]
 group = "WhitePaper"
