@@ -13,15 +13,15 @@ on:
     branches:
       - main
 
-# Allow one concurrent deployment
+# Supersede in-progress runs for the same ref, but let main runs finish.
 concurrency:
-  group: "pages"
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
-  # Build job
-  build_main:
-    if: ${{ github.event_name != 'push'}}
+  # Builds main as the baseline for the pull request diff.
+  build_reference:
+    if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     # We now refer to the container by its SHA instead of the name, to prevent
     # caching problems when updating the image.
@@ -29,7 +29,7 @@ jobs:
     container: khronosgroup/docker-images@sha256:089687083ceb36483a3917389e4278718ab19c594099634f5dd80e22540c960f
     steps:
       - name: Checkout
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: main
           submodules: true
@@ -39,30 +39,29 @@ jobs:
           mkdir -p latest
           find specs -name "*.html" -exec cp {} latest  \;
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: previous_rev
           path: latest
 
-  build_pr:
+  build_specs:
     runs-on: ubuntu-latest
-    # build_main only runs for pull requests, since a push to main needs no
-    # diff baseline. Without this condition a skipped build_main would skip
-    # build_pr too, which suppressed the whole workflow on every push.
-    needs: build_main
-    if: ${{ !cancelled() && needs.build_main.result != 'failure' }}
+    # build_reference is skipped on push events, and a skipped dependency would
+    # otherwise skip this job too.
+    needs: build_reference
+    if: ${{ !cancelled() && needs.build_reference.result != 'failure' }}
     # We now refer to the container by its SHA instead of the name, to prevent
     # caching problems when updating the image.
     # container: khronosgroup/docker-images:asciidoctor-spec.20240726
     container: khronosgroup/docker-images@sha256:089687083ceb36483a3917389e4278718ab19c594099634f5dd80e22540c960f
     steps:
       - name: Checkout
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           submodules: true
       - name: Get reference build
-        if: ${{ github.event_name != 'push'}}
-        uses: actions/download-artifact@v4
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: previous_rev
       - name: create artifact folder
@@ -83,17 +82,17 @@ jobs:
           make -C specs pdf
           cp specs/*.pdf artifact
       - name: Build diff
-        if: ${{ github.event_name != 'push'}}
+        if: ${{ github.event_name == 'pull_request' }}
         run: |
           make diff-dev
       - name: Save dev artifact
-        if: ${{ github.event_name != 'push'}}
-        uses: actions/upload-artifact@v4
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: diffs
           path: diff
       - name: Save release artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release
           path: artifact
