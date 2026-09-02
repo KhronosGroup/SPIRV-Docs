@@ -12,7 +12,7 @@ JSON_PATH = ../SPIRV-Headers/include/spirv/unified1/spirv.core.grammar.json
 
 ASCIIDOC_DEBUG_OPTIONS ?= --failure-level=WARN --trace
 ASCIIDOC_COMMON_OPTIONS ?= -a ratified_core_spec -a specs=$(CURDIR) -a examples=$(CURDIR)/examples -a images=$(CURDIR)/images $(ASCIIDOC_DEBUG_OPTIONS)
-ASCIIDOC_HTML_OPTIONS ?= $(ASCIIDOC_COMMON_OPTIONS) -b html5 -a data-uri -a stylesheet=resources/spirv.css --safe-mode safe
+ASCIIDOC_HTML_OPTIONS ?= $(ASCIIDOC_COMMON_OPTIONS) -b html5 -a data-uri -a stylesheet=resources/spirv.css -a sectanchors --safe-mode safe
 ASCIIDOC_PDF_OPTIONS ?= $(ASCIIDOC_COMMON_OPTIONS) -b pdf -d book -r asciidoctor-pdf -a pdf-theme=resources/spirv-theme.yml
 
 # PDF optimizer - usage $(OPTIMIZEPDF) in.pdf out.pdf
