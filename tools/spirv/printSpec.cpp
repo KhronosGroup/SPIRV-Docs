@@ -746,7 +746,8 @@ void ParameterizeSpec()
     #define FLOAT_CONTROL_OPERAND \
         "Only affects instructions operating on a floating-point type using the IEEE 754 encoding whose component width is _Target Width_. " \
         "_Target Width_ is an unsigned 32-bit integer. " \
-        "May be applied at most once per _Target Width_ to any entry point. "
+        "May be applied at most once per _Target Width_ to any entry point. " \
+        "Does not affect instructions decorated with *RelaxedPrecision*. "
 
     ExecutionModeParams[ExecutionModeDenormPreserve].desc = DENORM("preserved") SEE_CLIENT_API GAP FLOAT_CONTROL_OPERAND;
     ExecutionModeParams[ExecutionModeDenormFlushToZero].desc = DENORM("flushed to zero") SEE_CLIENT_API GAP FLOAT_CONTROL_OPERAND;
