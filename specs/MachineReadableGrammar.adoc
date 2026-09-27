@@ -155,8 +155,8 @@ endif::backend-html5[]
   <<capability,capabilities>> must be declared to use this instruction.
 `extensions`::
   A list of strings. _Optional_.
-  If this field exists, at least one of named extensions must be enable to
-  use this instruction.
+  The names of extensions that enable this instruction.
+  If absent, the instruction is always enabled.
 `aliases`::
   A list of strings. _Optional_. If this field exists, each string is
   an alternative name for this instruction.
