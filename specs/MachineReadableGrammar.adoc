@@ -153,10 +153,30 @@ endif::backend-html5[]
 `capabilities`::
   A list of strings. _Optional_. If this field exists, at least one of the named
   <<capability,capabilities>> must be declared to use this instruction.
+`extensions`::
+  A list of strings. _Optional_.
+  The names of extensions that enable this instruction.
+  If absent, the instruction is always enabled.
 `aliases`::
   A list of strings. _Optional_. If this field exists, each string is
   an alternative name for this instruction.
   Each name must appear exactly once and must not be equal to `opname`.
+`version`::
+  A string of the form `<major_version>.<minor_version>` or `None`.
+  This field is required.
+  It specifies the first version of SPIR-V that this instruction can be used
+  without an extension.
+  If the field is `None`, this instruction can only be used with an
+  enabling extension.
+`lastVersion`::
+  A string of the form `<major_version>.<minor_version>` or `None`. _Optional_.
+  If this field exists, it specifies the last version this instruction can
+  be used (without an extension).
+  This is added after an instruction is removed following a deprecation period.
+`provisional`::
+  A boolean. _Optional_.
+  If this field exists and is `true`, it indicates the instruction has been
+  released provisionally and may change before final release.
 
 [[operand-category]]
 === Operand categories
@@ -250,6 +270,9 @@ endif::backend-html5[]
   `capabilities`:::
     A list of strings. _Optional_. If this field exists, at least one of the named
     <<capability,capabilities>> must be declared to use this bitflag.
+  `extensions`:::
+    A list of strings. _Optional_. The names of extensions that enable this
+    bitflag.  If absent, the bitflag is always enabled.
   `parameters`:::
     A list of objects. _Optional_. Each object describes a logical parameter
     for this bitflag:
@@ -259,6 +282,22 @@ endif::backend-html5[]
     A list of strings. _Optional_. If this field exists, each string is
     an alternative name for this bitflag.
     Each name must appear exactly once and must not be equal to `enumerant`.
+  `version`:::
+    A string of the form `<major_version>.<minor_version>` or `None`.
+    This field is required.
+    It specifies the first version of SPIR-V that this enum can be used
+    without an extension.
+    If the field is `None`, this enum can only be used with an
+    enabling extension.
+  `lastVersion`:::
+    A string of the form `<major_version>.<minor_version>` or `None`. _Optional_.
+    If this field exists, it specifies the last version this enum can
+    be used (without an extension).
+    This is added after an enum is removed following a deprecation period.
+  `provisional`:::
+    A boolean. _Optional_.
+    If this field exists and is `true`, it indicates the enum has been
+    released provisionally and may change before final release.
 
 [[valueenum-operand-kind]]
 ==== The ValueEnum operand kind
@@ -311,6 +350,22 @@ endif::backend-html5[]
     A list of strings. _Optional_. If this field exists, each string is
     an alternative name for this enumerant.
     Each name must appear exactly once  and must not be equal to `enumerant`.
+  `version`:::
+    A string of the form `<major_version>.<minor_version>` or `None`.
+    This field is required.
+    It specifies the first version of SPIR-V that this enum can be used
+    without an extension.
+    If the field is `None`, this enum can only be used with an
+    enabling extension.
+  `lastVersion`:::
+    A string of the form `<major_version>.<minor_version>` or `None`. _Optional_.
+    If this field exists, it specifies the last version this enum can
+    be used (without an extension).
+    This is added after an enum is removed following a deprecation period.
+  `provisional`:::
+    A boolean. _Optional_.
+    If this field exists and is `true`, it indicates the enum has been
+    released provisionally and may change before final release.
 
 [[capability]]
 ===== The Capability operand kind
