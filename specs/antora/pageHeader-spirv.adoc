@@ -1,0 +1,5 @@
+// Copyright 2026 The Khronos Group Inc.
+// SPDX-License-Identifier: CC-BY-4.0
+
+// Boilerplate to include in Antora spec pages for SPIR-V
+include::{specs}/entities.adoc[]

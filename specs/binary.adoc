@@ -1,5 +1,8 @@
+:leveloffset: +1
 [[Binary]]
-== Binary Form
+= Binary Form
+:leveloffset: -1
+
 This section contains the exact form for all instructions, starting with the numerical values for all fields. See <<PhysicalLayout, Physical Layout>> for the order words appear in.
 
 
