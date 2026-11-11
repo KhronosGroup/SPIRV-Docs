@@ -2631,12 +2631,9 @@ void ParameterizeSpec()
                                             "and results are computed per component."
                                         GAP "If _Result Type_ has a different number of components than _Operand_, "
                                             "the total number of bits in _Result Type_ must equal the total number of bits in _Operand_. "
-                                            "Let _L_ be the type, either _Result Type_ or _Operand's_ type, that has the larger number of components. "
-                                            "Let _S_ be the other type, with the smaller number of components. "
-                                            "The number of components in _L_ must be an integer multiple of the number of components in _S_. "
-                                            "The first component (that is, the only or lowest-numbered component) of _S_ maps to the first components of _L_, and so on, "
-                                            "up to the last component of _S_ mapping to the last components of _L_. "
-                                            "Within this mapping, any single component of _S_ (mapping to multiple components of _L_) maps its lower-ordered bits to the lower-numbered components of _L_.";
+                                            "Within each type, the first component (that is, the only or lowest-numbered component) occupies the lowest-ordered bits, "
+                                            "and each following component occupies the next higher-ordered bits. "
+                                            "Each bit of _Operand_ maps to the bit in the same position of the result.";
 
     InstructionDesc[OpQuantizeToF16].capabilities.push_back("Shader");
     InstructionDesc[OpQuantizeToF16].opDesc = "Quantize a floating-point value to what is expressible by a 16-bit floating-point value."
