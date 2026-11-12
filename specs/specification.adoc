@@ -1,8 +1,10 @@
 // Copyright 2015-2026 The Khronos Group Inc.
 // SPDX-License-Identifier: CC-BY-4.0
 
+:leveloffset: +1
 [[Specification]]
-== Specification
+= Specification
+:leveloffset: -1
 
 [[Capabilities]]
 === Language Capabilities
@@ -489,7 +491,7 @@ Tools may be able to deduce from a static module that <<UndefinedBehavior,
 behavior will be undefined>> if some part were to be executed, and alert
 a user to that fact.
 However, this does not allow the tool to classify the module as invalid.
- 
+
 Sometimes, SPIR-V refers to the client API to specify what is statically
 valid or dynamically defined for a specific situation, in which case those
 rules come from the client API's execution environment.

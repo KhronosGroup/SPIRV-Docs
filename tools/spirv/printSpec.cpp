@@ -5203,7 +5203,7 @@ void PrintDoc()
 {
     ParameterizeSpec();
 
-    printf("[[Binary]]\n== Binary Form\n");
+    printf(":leveloffset: +1\n[[Binary]]\n= Binary Form\n:leveloffset: -1\n\n");
 
     printf("This section contains the exact form for all instructions, starting with the numerical values for all fields. "
            "See <<PhysicalLayout, Physical Layout>> for the order words appear in.\n\n");
