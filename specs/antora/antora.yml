@@ -16,5 +16,8 @@ asciidoc:
 #    imageopts: inline
     imageopts: ''
     refprefix: ''
+# Increase Contents right-hand side navigation panel levels for this
+# component, per request from SPIR-V WG.
+    page-toclevels: 3
 nav:
 - modules/ROOT/nav.adoc
