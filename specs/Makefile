@@ -132,7 +132,7 @@ check:
 
 # Antora conversion
 SCRIPTS   = $(CURDIR)/scripts
-MKDIR     = mkdir -p
+MKDIR	  = mkdir -p
 
 HTMLDIR   = .
 GENERATED = generated
@@ -166,7 +166,7 @@ setup_antora: xrefMap .WAIT setup_spirv_antora
 # with the xrefMap above to map VUID anchors into the Antora pages they
 # are found within.
 
-ANTORA_SPECMODULE = antora/spec/modules/spirv
+ANTORA_SPECMODULE = antora/modules/ROOT
 
 # The list of files is long enough to exceed system limits on argument
 # lists, so instead of passing them on the command line they are stored
@@ -175,39 +175,33 @@ ANTORA_FILELIST = $(GENERATED)/antoraFileList.txt
 
 # Additional individual files to include - config (copyright), attributes, images, etc.
 ANTORA_EXTRAFILES = \
+	./examples/* \
 	./images/*.svg \
+	./images/*.png \
 	$(JSXREFMAP) \
 	$(JSAPIMAP)
 
 # The pageMap is copied, separately since antora-prep.py creates it.
 #@ deps: $(JSAPIMAP)
-#@        cp $(JSPAGEMAP) $(ANTORA_SPECMODULE)/partials/$(GENERATED_DIR)
+#@	  cp $(JSPAGEMAP) $(ANTORA_SPECMODULE)/partials/$(GENERATED_DIR)
 setup_spirv_antora pageMap $(JSPAGEMAP) $(PYPAGEMAP): xrefMap spirv_nav_antora
+	$(MKDIR) $(ANTORA_SPECMODULE)
 	ls -1 [A-Za-z]*.adoc $(ANTORA_EXTRAFILES) > $(ANTORA_FILELIST)
 	$(PYTHON) $(SCRIPTS)/antora-prep.py \
 	    -root . \
 	    -component $(shell realpath $(ANTORA_SPECMODULE)) \
 	    -pageHeaders antora/pageHeaders-spirv.adoc \
 	    -xrefMap $(PYXREFMAP) \
-	    -module 'spirv::' \
 	    -jspagemap $(JSPAGEMAP) \
 	    -pypagemap $(PYPAGEMAP) \
 	    -filelist $(ANTORA_FILELIST)
 
-# Construct the spec component nav.adoc from the list of included
-# chapters in vkspec.adoc, so it remains up to date.
-# This is a simple transformation turning include directives into xrefs.
-# Unfortunately we cannot set or use attributes in nav files, so the
-#   {chapters} and {appendices} attributes must be turned into hardcoded
-#   paths in the pages/ directory.
-SPECSRC = SPIRV.adoc
+# Construct the SPIR-V component nav.adoc
+# Eventually this should be generated dynamically from the different
+# target specifications.
 SPECNAV = $(ANTORA_SPECMODULE)/nav.adoc
 spirv_nav_antora: $(SPECSRC)
-	cat $(SPECSRC) | \
-	    sed -n '/tag::antora-vulkan-nav/,/end::antora-vulkan-nav/p' | \
-	    egrep '^include::' | \
-	    tr -d '{}' | \
-	    sed -e 's/include::/* xref:/' > $(SPECNAV)
+	echo "antora/modules/ROOT/nav.adoc is currently a static, commited file"
 
 # Clean generated and output files
 
@@ -219,17 +213,15 @@ spirv_nav_antora: $(SPECSRC)
 # also checked in.
 CLEAN_ANTORA_PATHS = \
 	$(ANTORA_FILELIST) \
-	antora/spec/modules/spirv/nav.adoc \
-	antora/spec/modules/spirv/images \
-	antora/spec/modules/spirv/pages/*.adoc \
-	antora/spec/modules/spirv/partials \
-	antora/spec/modules/spirv/pages/$(GENERATED_DIR) \
-	antora/spec/modules/spirv/partials \
+	$(ANTORA_SPECMODULE)/images \
+	$(filter-out $(ANTORA_SPECMODULE)/pages/index.adoc, $(wildcard $(ANTORA_SPECMODULE)/pages/*.adoc)) \
+	$(ANTORA_SPECMODULE)/partials \
+	$(ANTORA_SPECMODULE)/pages/$(GENERATED) \
 	$(JSXREFMAP) \
 	$(PYXREFMAP) \
 	$(JSPAGEMAP) \
 	$(PYPAGEMAP)
 
 clean_antora:
-	rm -rf $(CLEAN_ANTORA_PATHS)
+	echo rm -rf $(CLEAN_ANTORA_PATHS)
 
