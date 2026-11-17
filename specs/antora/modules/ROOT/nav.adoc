@@ -1,3 +1,6 @@
+// Copyright 2026 The Khronos Group Inc.
+// SPDX-License-Identifier: CC-BY-4.0
+
 // Static sidebar navigation for SPIR-V Antora component
 // Eventually this should be generated dynamically from the various different
 // documents in the asciidoctor build.
