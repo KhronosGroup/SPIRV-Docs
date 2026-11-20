@@ -38,10 +38,13 @@ ALL_DOCS=$(ALL_HTMLS) $(ALL_PDFS)
 
 all: $(ALL_DOCS)
 
-clean:
-	rm -f $(ALL_DOCS)
+clean: clean_docs
 	rm -f binary.adoc GLSLGenerated.adoc OpenCLGenerated.adoc
 	rm -f auto.*.adoc unified-version-info
+
+# Just remove generated HTML/PDF targets, not intermediate files
+clean_docs:
+	rm -f $(ALL_DOCS)
 
 # The file unified-version-info acts as a collective timestamp
 # for the recency of the spec fragments that embed title, authorship,
