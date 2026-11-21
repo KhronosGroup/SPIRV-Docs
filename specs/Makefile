@@ -153,7 +153,6 @@ $(PYXREFMAP): $(HTMLDIR)/SPIRV.html
 
 # Generate all Antora module content
 
-#@ setup_features_antora setup_refpages_antora
 setup_antora: xrefMap .WAIT setup_spirv_antora
 
 # Generate Antora spec module content by rewriting spec sources
