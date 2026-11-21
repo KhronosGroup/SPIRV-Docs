@@ -7,7 +7,7 @@
 For example, version 1.0 Revision 4 should be described in file version.1.0.4
 
 Output files are:
-    auto.intro.adoc        - Version info.
+    auto.version.adoc      - Version info (now just an asciidoc attribute with the version string)
     auto.intro.author.adoc - Author info.
     auto.changes.adoc      - Collected change log, ordered by version.
 """
@@ -52,13 +52,6 @@ def generate_asciidoc_front_matter(out, versionfile):
     """Writes front matter deduced from the given version file
     into the specified output file handle."""
     with open(versionfile, 'r') as f:
-        for line in f:
-            if line.startswith('title: '):
-                title = line[7:].strip()
-                out.write('= %s\n' % title)
-        out.write(':tmtitle: pass:q,r[^™^]\n')
-        out.write(':regtitle: pass:q,r[^®^]\n')
-        out.write('The Khronos{regtitle} SPIR{tmtitle} Working Group\n')
         out.write('%s\n' % (format_version_from_name(versionfile)))
 
 def generate_asciidoc_author(out, versionfile):
@@ -143,7 +136,7 @@ def main():
     files = get_version_files_in_order(os.getcwd())
 
     # The front matter only depends on the highest version file.
-    with open('auto.intro.adoc', 'w') as intro_file:
+    with open('auto.version.adoc', 'w') as intro_file:
         generate_asciidoc_front_matter(intro_file, files[-1])
 
     # Editor.

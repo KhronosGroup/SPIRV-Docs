@@ -1,0 +1,23 @@
+# Copyright 2026 The Khronos Group Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+name: spirv
+title: SPIR-V Specification
+version: latest
+# stem (latexmath) support is provided by the @djencks/asciidoctor-mathjax
+# extension, loaded in the playbook.
+asciidoc:
+  attributes:
+    stem: latexmath
+    specs: partial$
+    examples: partial$examples
+    images: image$
+# Not supported for SVG yet - see https://gitlab.com/antora/antora/-/issues/1001
+#    imageopts: inline
+    imageopts: ''
+    refprefix: ''
+# To increase the RHS navigation panel depth, this can be set globally or
+# separately in different pages.
+#   page-toclevels: 3
+nav:
+- modules/ROOT/nav.adoc

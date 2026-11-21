@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: CC-BY-4.0
 
 [[Specification]]
-== Specification
+= Specification
 
 [[Capabilities]]
-=== Language Capabilities
+== Language Capabilities
 
 A SPIR-V module is consumed by a client API that needs to support the features used by that SPIR-V module.
 Features are classified through <<Capability, capabilities>>.
@@ -28,9 +28,9 @@ Additionally, each client API includes the following:
 - Any additional validation rules it has beyond those specified by the SPIR-V specification.
 - Required limits, if they are beyond the <<Limits, Universal Limits>>.
 
-=== Terms
+== Terms
 
-==== Instructions
+=== Instructions
 
 [[Word]]_Word_: 32 bits.
 
@@ -98,7 +98,7 @@ a request to the compiler to perform a specific transformation. They do not affe
 Unless stated otherwise, the compiler must not assume the property will be observed
 or the transformation is always safe to be performed.
 
-==== Types
+=== Types
 
 [[Boolean]]_Boolean type_: The type declared by <<OpTypeBool,*OpTypeBool*>>.
 
@@ -206,12 +206,12 @@ recursively applied to any nested types:
  - A pointer to a structure decorated with *Block* or *BufferBlock* must not have an *ArrayStride* decoration
  - All members of a given structure must have distinct *Offset* decorations.
 
-==== Computation
+=== Computation
 
 [[Remainder]]_Remainder_: When dividing _a_ by _b_, a _remainder_ _r_ is defined to be a value that satisfies
 _r_ + _q_ {times} _b_ = _a_ where _q_ is an integer and |_r_| < |_b_|.
 
-==== Module
+=== Module
 
 [[Module]]_Module_: A single unit of SPIR-V. It can contain multiple <<EntryPoint,_entry points_>>, but only one set of <<Capability, capabilities>>.
 
@@ -229,7 +229,7 @@ of instructions within a SPIR-V module.
 [[VertexProcessor]]_Vertex Processor_: Any stage or execution model that processes vertices: Vertex, tessellation control, tessellation evaluation, and geometry.
 Explicitly excludes fragment and compute execution models.
 
-==== Control Flow
+=== Control Flow
 
 [[Block]]_Block_: A contiguous sequence of instructions starting with an <<OpLabel, *OpLabel*>>, ending with a <<Termination, block termination instruction>>.
 A _block_ has no additional label or block termination instructions.
@@ -406,7 +406,7 @@ and all invocations leave that loop or selection via the header block's declared
 then control flow reconverges to be uniform at that merge block.
 
 
-==== Validity and Defined Behavior
+=== Validity and Defined Behavior
 
 [[UndefinedBehavior]]_Undefined Behavior_: No specific behavior is required by this specification.
 If performing an operation would result in undefined behavior, behavior for the entire module is undefined.
@@ -475,11 +475,11 @@ to look.
 These are expressed using terms like _must_, _must not_, _valid_,
 _not valid_, and _invalid_.
 Such rules establish whether the module is classified as valid or not valid,
-which in turn provides terms that tools may use in labeling and describing 
+which in turn provides terms that tools may use in labeling and describing
 modules they process.
-A module is valid only if it does not violate any of these statically 
+A module is valid only if it does not violate any of these statically
 expressed rules.
-Such rules might not be considered violated if a specialization constant is 
+Such rules might not be considered violated if a specialization constant is
 involved, as described in the <<SpecializationSection, specialization
 constant section>>.
 
@@ -489,7 +489,7 @@ Tools may be able to deduce from a static module that <<UndefinedBehavior,
 behavior will be undefined>> if some part were to be executed, and alert
 a user to that fact.
 However, this does not allow the tool to classify the module as invalid.
- 
+
 Sometimes, SPIR-V refers to the client API to specify what is statically
 valid or dynamically defined for a specific situation, in which case those
 rules come from the client API's execution environment.
@@ -502,7 +502,7 @@ Client APIs are not required to handle invalid modules.
 
 <<<
 [[PhysicalLayout]]
-=== Physical Layout of a SPIR-V Module and Instruction
+== Physical Layout of a SPIR-V Module and Instruction
 
 A SPIR-V module is a single linear stream of <<Word,_words_>>. The first words are shown in the following table:
 
@@ -548,7 +548,7 @@ Instructions are variable length due both to having optional instruction type _<
 The details for each specific instruction are given in the <<Binary, Binary Form>> section.
 
 [[LogicalLayout]]
-=== Logical Layout of a Module
+== Logical Layout of a Module
 
 The instructions of a SPIR-V module must be in the following order.
 For sections earlier than function definitions, it is invalid to use instructions other than those indicated.
@@ -622,7 +622,7 @@ without needing additional type information.
 
 The <<Validation, Validation Rules>> section lists additional rules.
 
-=== Instructions
+== Instructions
 
 Most instructions create a <<ResultId,_Result <id>_>>, as provided in the _Result <id>_ field of the instruction.
 These _Result <id>s_ are then referred to by other instructions through their _<id>_ operands.
@@ -639,7 +639,7 @@ Some common examples of <<Literal, literals>>:
   The low-order 32 bits appear in the first operand.
 
 [[SSA]]
-==== SSA Form
+=== SSA Form
 
 A module is always in static single assignment (SSA) form.  That is, there is always exactly one instruction resulting in any particular <<ResultId,_Result <id>_>>.
 Storing into variables declared in memory is not subject to this; such stores do not create _Result <id>s_.  Accessing declared variables is done through:
@@ -653,7 +653,7 @@ Storing into variables declared in memory is not subject to this; such stores do
 If this happens in multiple control-flow paths, these values need to be merged again at the path's merge point.
 Use <<OpPhi,*OpPhi*>> to merge such values together.
 
-=== Entry Point and Execution Model
+== Entry Point and Execution Model
 
 The <<OpEntryPoint,*OpEntryPoint*>> instruction identifies an <<EntryPoint, _entry point_>> with two key things:
 an execution model and a function definition.
@@ -673,7 +673,7 @@ Similarly, variables whose semantics depend on properties of an entry point, e.g
 the *Input* <<Storage_Class,Storage Class>>,
 may behave differently if used in call graphs rooted in two different entry points.
 
-=== Execution Modes
+== Execution Modes
 
 Information like the following is declared with <<OpExecutionMode,*OpExecutionMode*>> instructions.
 For example,
@@ -687,7 +687,7 @@ For example,
 For a complete list, see <<Execution_Mode, Execution Mode>>.
 
 [[TypesVariables]]
-=== Types and Variables
+== Types and Variables
 
 Types are built up hierarchically, using <<OpTypeVoid,*OpTypeXXX*>> instructions.
 The <<ResultId,_Result <id>_>> of an <<OpTypeVoid,*OpTypeXXX*>> instruction becomes
@@ -747,7 +747,7 @@ followed by a <<BuiltIn,*BuiltIn*>> enumerant.
 See the <<BuiltIn, BuiltIn>> section for details on what can be decorated as a built-in variable.
 
 [[UnsignedSigned]]
-==== Unsigned Versus Signed Integers
+=== Unsigned Versus Signed Integers
 
 The integer type, <<OpTypeInt, *OpTypeInt*>>, is parameterized not only with a size, but also with signedness.
 There are two different ways to think about signedness in SPIR-V, both are internally consistent and acceptable:
@@ -779,7 +779,7 @@ there are a few cases known to do this, all confined to modules declaring the *S
   <<Image_Operands, image operands>> are not available
   (if available, these operands are the supported way to communicate this).
 
-=== Function Calling
+== Function Calling
 
 To call a function defined in the current module or a function declared to be imported from another module,
 use <<OpFunctionCall,*OpFunctionCall*>> with an operand that is the _<id>_ of the <<OpFunction,*OpFunction*>> to call,
@@ -788,7 +788,7 @@ All arguments are passed by value into the called function.
 This includes pointers, through which a callee object could be modified.
 
 [[ExtInst]]
-=== Extended Instruction Sets
+== Extended Instruction Sets
 
 Many operations and/or built-in function calls from high-level languages are represented through _extended instruction sets_.
 Extended instruction sets include things like
@@ -844,7 +844,7 @@ An extended instruction set specification provides opcode enumerant values for t
 and these are produced by the front end and consumed by the back end.
 
 [[StructuredControlFlow]]
-=== Structured Control Flow
+== Structured Control Flow
 
 SPIR-V can explicitly declare structured control-flow _constructs_ using <<Merge, merge instructions>>.
 These explicitly declare a <<HeaderBlock, header block>> before the control flow diverges and a
@@ -854,7 +854,7 @@ by the time the merge block is reached.)
 These blocks delimit constructs that must nest, and must be entered and exited in structured ways,
 as per the following.
 
-==== Rules for Structured Control-flow Declarations
+=== Rules for Structured Control-flow Declarations
 
 Structured control flow declarations must satisfy the following rules:
 
@@ -869,7 +869,7 @@ Structured control flow declarations must satisfy the following rules:
   * the _Continue Target_ must structurally dominate the _back-edge block_
   * the _back-edge block_ must <<StructurallyPostDominate,structurally post dominate>> the _Continue Target_
 
-==== Structured Control-flow Constructs
+=== Structured Control-flow Constructs
 
 A structured control-flow _construct_ is defined as one of:
 
@@ -885,7 +885,7 @@ A structured control-flow _construct_ is defined as one of:
   (note that as a consequence of this definition, an *OpSwitch* _Target_ or _Default_ block that is equal to the *OpSwitch's* corresponding merge block does not give rise to a case construct)
 
 [[ConstructRules]]
-==== Rules for Structured Control-flow Constructs
+=== Rules for Structured Control-flow Constructs
 
 Below, we will use the following terminology:
 
@@ -936,7 +936,7 @@ If the header block of a structured control-flow construct is <<StructurallyReac
 
 
 [[SpecializationSection]]
-=== Specialization
+== Specialization
 
 _Specialization_ is intended for constant objects that will not have known
 constant values until after initial generation of a SPIR-V module.
@@ -1007,7 +1007,7 @@ and that constant is a specialization constant, then that rule is not violated.
 (Consequently, specialization-constant default values are not relevant to the validity of the module.)
 
 [[Linkage]]
-=== Linkage
+== Linkage
 
 The ability to have partially linked modules and libraries is provided as part of the <<Capability,*Linkage*>> capability.
 
@@ -1027,7 +1027,7 @@ When resolving imported functions, the <<Function_Control,_Function Control_>> a
 are taken from the function definition, and not from the function declaration.
 
 [[RelaxedPrecisionSection]]
-=== Relaxed Precision
+== Relaxed Precision
 
 The *RelaxedPrecision* <<Decoration,Decoration>> allows 32-bit integer and 32-bit floating-point operations to execute
 with a relaxed precision of somewhere between 16 and 32 bits.
@@ -1092,7 +1092,7 @@ For image-sampling operations, decorations can appear on both the sampling instr
 If either is decorated, they both should be decorated, and if both are decorated their decorations must match.
 If only one is decorated, the sampling instruction can behave either as if both were decorated or neither were decorated.
 
-=== Debug Information
+== Debug Information
 
 Debug information is supplied with:
 
@@ -1102,7 +1102,7 @@ Debug information is supplied with:
 
 A module does not lose any semantics when all such instructions are removed.
 
-==== Function-Name Mangling
+=== Function-Name Mangling
 
 There is no functional dependency on how functions are named.
 Signature-typing information is explicitly provided, without any need for name "unmangling".
@@ -1110,9 +1110,9 @@ Signature-typing information is explicitly provided, without any need for name "
 By convention, for debugging purposes, modules with <<OpSource,*OpSource*>> _Source Language_ of OpenCL use the Itanium name-mangling standard.
 
 [[Validation]]
-=== Validation Rules
+== Validation Rules
 
-==== Universal Validation Rules
+=== Universal Validation Rules
 
 - When using <<OpBitcast, *OpBitcast*>> to convert pointers to/from vectors of integers, only
   vectors of 32-bit integers are allowed.
@@ -1373,7 +1373,7 @@ By convention, for debugging purposes, modules with <<OpSource,*OpSource*>> _Sou
   the product of all workgroup size dimensions must not be zero.
 
 [[ShaderValidation]]
-==== Validation Rules for Shader <<Capability,Capabilities>>
+=== Validation Rules for Shader <<Capability,Capabilities>>
 
 - CFG:
 * Loops must be structured. That is, the target basic block of a <<BackEdge,back edge>> must contain an <<OpLoopMerge,*OpLoopMerge*>> instruction.
@@ -1431,14 +1431,14 @@ By convention, for debugging purposes, modules with <<OpSource,*OpSource*>> _Sou
 - Atomic access rules
 * The pointers taken by atomic operation instructions are further restricted to not point into the *Function* <<Storage_Class, storage class>>.
 
-==== Validation Rules for Kernel <<Capability,Capabilities>>
+=== Validation Rules for Kernel <<Capability,Capabilities>>
 
 - The _Signedness_ in *OpTypeInt* must always be 0.
 
 
 <<<
 [[Limits]]
-=== Universal Limits
+== Universal Limits
 
 These quantities are minimum limits for all implementations and validators.
 Implementations are allowed to support larger quantities.
@@ -1482,7 +1482,7 @@ Validators inform when these limits (or explicitly parameterized limits) are cro
 |========
 
 [[MemoryModelSection]]
-=== Memory Model
+== Memory Model
 
 A memory model is chosen using a single <<OpMemoryModel,*OpMemoryModel*>> instruction near the beginning of the module.  This selects both an addressing model and a memory model.
 
@@ -1496,7 +1496,7 @@ Pointers for one Storage Class must not be used to access objects in another Sto
 Any particular addressing model describes the bit width of pointers for each of the storage classes.
 
 [[MemoryLayout]]
-==== Memory Layout
+=== Memory Layout
 
 *Offset*, *MatrixStride*, and *ArrayStride* <<Decoration, Decorations>> partially define how a memory buffer is laid out.
 In addition, the following also define layout of a memory buffer, applied recursively as needed:
@@ -1510,7 +1510,7 @@ In addition, the following also define layout of a memory buffer, applied recurs
   (the *RowMajor* and *ColMajor* <<Decoration,Decorations>> dictate what is contiguous)
 
 [[AliasingSection]]
-==== Aliasing
+=== Aliasing
 
 Two <<MemoryObjectDeclaration, memory object declarations>> are said to _alias_ if they can be accessed (in bounds)
 such that both accesses address the same memory locations during their intersecting dynamic lifetimes.
@@ -1590,28 +1590,28 @@ It is invalid to apply both *Restrict* and *Aliased* to the same _<id>_.
 
 It is invalid to apply both *RestrictPointer* and *AliasedPointer* to the same _<id>_.
 
-==== Null pointers
+=== Null pointers
 
 A "null pointer" can be formed from an <<OpConstantNull, *OpConstantNull*>> instruction with a pointer result type.
 The resulting pointer value is abstract, and will not equal the pointer value formed from any
 declared object or access chain into a declared object.
 Behavior is undefined if a load or store through *OpConstantNull* is executed.
 
-=== Derivatives
+== Derivatives
 
 Derivatives appear only in the *Fragment* <<Execution_Model, Execution Model>>. They are either implicit or explicit.
 Some <<Image, image instructions>> consume implicit derivatives, while the <<Derivative, derivative instructions>> compute explicit derivatives.
 In all cases, derivatives are well defined when the <<DerivativeGroup, derivative group>> has <<UniformControlFlow, uniform control flow>>,
 otherwise see the client API specification for what behavior is allowed.
 
-=== Code Motion
+== Code Motion
 
 Texturing instructions in the Fragment <<Execution_Model,Execution Model>> that rely on an implicit derivative
 won't be moved into control flow that is
 not known to be <<UniformControlFlow, uniform control flow>> within each <<DerivativeGroup, derivative group>>.
 
 [[Deprecation]]
-=== Deprecation
+== Deprecation
 
 A feature may be marked as deprecated by a version of the specification or extension to the specification.
 Features marked as deprecated in one version of the specification are still present in that version,
@@ -1625,7 +1625,7 @@ The full list of removed features is available in appendix Z.
 ////
 
 [[Unified]]
-=== Unified Specification
+== Unified Specification
 
 This document specifies all versions of *SPIR-V*.
 
@@ -1647,7 +1647,7 @@ There are three kinds of entries in the tables of enumerated tokens:
   They are valid in all versions of *SPIR-V*.
 
 [[Uniformity]]
-=== Uniformity
+== Uniformity
 
 SPIR-V has multiple notions of uniformity of values.
 A _Result <id>_ <<Decoration, decorated>> as *Uniform* (for a particular scope) is a contract that

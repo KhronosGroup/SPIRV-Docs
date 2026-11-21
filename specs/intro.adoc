@@ -2,7 +2,11 @@
 // SPDX-License-Identifier: CC-BY-4.0
 
 :main-spec:
-include::{specs}/auto.intro.adoc[]
+= SPIR-V Specification
+:tmtitle: pass:q,r[^™^]
+:regtitle: pass:q,r[^®^]
+The Khronos{regtitle} SPIR{tmtitle} Working Group
+include::{specs}/auto.version.adoc[]
 include::{specs}/boilerplate.adoc[]
 
 include::{specs}/copyright-spec.adoc[]

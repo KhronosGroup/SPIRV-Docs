@@ -4601,13 +4601,13 @@ void PrintSectionHeader(const char* desc, const char* tag = 0)
 {
     std::string safe = tag ? tag : desc;
     SafeTag(safe);
-    printf("\n[[%s]]\n=== %s\n", safe.c_str(), desc);
+    printf("\n[[%s]]\n== %s\n", safe.c_str(), desc);
 }
 void PrintSubSectionHeader(const char* desc, const char* tag = 0)
 {
     std::string safe = tag ? tag : desc;
     SafeTag(safe);
-    printf("\n[[%s]]\n==== %s\n", safe.c_str(), desc);
+    printf("\n[[%s]]\n=== %s\n", safe.c_str(), desc);
 }
 
 void PrintMagicNumber()
@@ -5193,7 +5193,7 @@ void PrintOpcodes()
         if (pageBreak)
             printf("<<<\n"); // page break, except for the first set
         pageBreak = true;
-        printf("[[%s]]\n==== %s\n", opClass.tag.c_str(), opClass.heading.c_str());
+        printf("[[%s]]\n=== %s\n", opClass.tag.c_str(), opClass.heading.c_str());
         PrintOpcodeClass(opClass);
     }
 }
@@ -5203,7 +5203,7 @@ void PrintDoc()
 {
     ParameterizeSpec();
 
-    printf("[[Binary]]\n== Binary Form\n");
+    printf("[[Binary]]\n= Binary Form\n\n");
 
     printf("This section contains the exact form for all instructions, starting with the numerical values for all fields. "
            "See <<PhysicalLayout, Physical Layout>> for the order words appear in.\n\n");

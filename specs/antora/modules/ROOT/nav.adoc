@@ -1,0 +1,28 @@
+// Copyright 2026 The Khronos Group Inc.
+// SPDX-License-Identifier: CC-BY-4.0
+
+// Static sidebar navigation for SPIR-V Antora component
+// Eventually this should be generated dynamically from the various different
+// documents in the asciidoctor build.
+
+* SPIR-V Specification
+** xref:intro.adoc[Introduction]
+** xref:specification.adoc[Specification]
+** xref:binary.adoc[Binary Form]
+** xref:changes.adoc[Changes]
+
+// = SPIR-V Machine-readable Grammar
+* xref:MachineReadableGrammar.adoc[]
+
+// = SPIR-V Extended Instructions for GLSL
+* xref:GLSL.std.450.adoc[]
+
+// = Debug Information Extended Instruction Set Specification
+* xref:DebugInfo.adoc[]
+
+// = OpenCL Extended Instruction Set Specification
+* xref:OpenCL.std.adoc[]
+
+// = OpenCL.DebugInfo.100 Information Extended Instruction Set Specification
+* xref:OpenCL.DebugInfo.100.adoc[]
+
