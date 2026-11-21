@@ -38,7 +38,7 @@ ALL_DOCS=$(ALL_HTMLS) $(ALL_PDFS)
 
 all: $(ALL_DOCS)
 
-clean: clean_docs
+clean: clean_docs clean_antora
 	rm -f binary.adoc GLSLGenerated.adoc OpenCLGenerated.adoc
 	rm -f auto.*.adoc unified-version-info
 
@@ -140,34 +140,24 @@ MKDIR	  = mkdir -p
 HTMLDIR   = .
 GENERATED = generated
 PYXREFMAP = $(GENERATED)/xrefMap.py
-JSXREFMAP = $(GENERATED)/xrefMap.cjs
-JSPAGEMAP = $(GENERATED)/pageMap.cjs
-PYPAGEMAP = $(GENERATED)/pageMap.py
 
 # Cross-references of anchors to spec chapters they lie within
-# Used both by Antora and validusage_page targets
+# Used by Antora targets
 
-xrefMap: $(PYXREFMAP) $(JSXREFMAP)
+xrefMap: $(PYXREFMAP)
 
-#@ Need to handle multiple SPIR-V specs, eventually
-$(PYXREFMAP) $(JSXREFMAP): $(HTMLDIR)/SPIRV.html
+$(PYXREFMAP): $(HTMLDIR)/SPIRV.html
 	$(MKDIR) $(GENERATED)
 	$(PYTHON) $(SCRIPTS)/map_html_anchors.py \
-	    $(HTMLDIR)/SPIRV.html -pyfile $(PYXREFMAP) -jsfile $(JSXREFMAP)
+	    $(HTMLDIR)/SPIRV.html -pyfile $(PYXREFMAP)
 
 # Generate all Antora module content
-# After the targets are built, the $(JSXREFMAP) and $(JSPAGEMAP) files
-# used by spec macros in the Antora build must be copied into the Antora
-# project build tree, which is in a different repository.
 
 #@ setup_features_antora setup_refpages_antora
 setup_antora: xrefMap .WAIT setup_spirv_antora
 
 # Generate Antora spec module content by rewriting spec sources
 # Individual files must be specified last
-# This target is also used to generate the pageMap, which is combined
-# with the xrefMap above to map VUID anchors into the Antora pages they
-# are found within.
 
 ANTORA_SPECMODULE = antora/modules/ROOT
 
@@ -180,14 +170,10 @@ ANTORA_FILELIST = $(GENERATED)/antoraFileList.txt
 ANTORA_EXTRAFILES = \
 	./examples/* \
 	./images/*.svg \
-	./images/*.png \
-	$(JSXREFMAP) \
-	$(JSAPIMAP)
+	./images/*.png
 
 # The pageMap is copied, separately since antora-prep.py creates it.
-#@ deps: $(JSAPIMAP)
-#@	  cp $(JSPAGEMAP) $(ANTORA_SPECMODULE)/partials/$(GENERATED_DIR)
-setup_spirv_antora pageMap $(JSPAGEMAP) $(PYPAGEMAP): xrefMap spirv_nav_antora
+setup_spirv_antora pageMap: xrefMap spirv_nav_antora
 	$(MKDIR) $(ANTORA_SPECMODULE)
 	ls -1 [A-Za-z]*.adoc $(ANTORA_EXTRAFILES) > $(ANTORA_FILELIST)
 	$(PYTHON) $(SCRIPTS)/antora-prep.py \
@@ -195,8 +181,6 @@ setup_spirv_antora pageMap $(JSPAGEMAP) $(PYPAGEMAP): xrefMap spirv_nav_antora
 	    -component $(shell realpath $(ANTORA_SPECMODULE)) \
 	    -pageHeaders antora/pageHeaders-spirv.adoc \
 	    -xrefMap $(PYXREFMAP) \
-	    -jspagemap $(JSPAGEMAP) \
-	    -pypagemap $(PYPAGEMAP) \
 	    -filelist $(ANTORA_FILELIST)
 
 # Construct the SPIR-V component nav.adoc
@@ -204,7 +188,8 @@ setup_spirv_antora pageMap $(JSPAGEMAP) $(PYPAGEMAP): xrefMap spirv_nav_antora
 # target specifications.
 SPECNAV = $(ANTORA_SPECMODULE)/nav.adoc
 spirv_nav_antora: $(SPECSRC)
-	echo "antora/modules/ROOT/nav.adoc is currently a static, commited file"
+	echo "NOTE: $(SPECNAV) is a static, committed file and must"
+	echo "be updated when new pages (chapters) are added."
 
 # Clean generated and output files
 
@@ -216,15 +201,13 @@ spirv_nav_antora: $(SPECSRC)
 # also checked in.
 CLEAN_ANTORA_PATHS = \
 	$(ANTORA_FILELIST) \
+	generated \
+	$(PYXREFMAP) \
 	$(ANTORA_SPECMODULE)/images \
 	$(filter-out $(ANTORA_SPECMODULE)/pages/index.adoc, $(wildcard $(ANTORA_SPECMODULE)/pages/*.adoc)) \
 	$(ANTORA_SPECMODULE)/partials \
-	$(ANTORA_SPECMODULE)/pages/$(GENERATED) \
-	$(JSXREFMAP) \
-	$(PYXREFMAP) \
-	$(JSPAGEMAP) \
-	$(PYPAGEMAP)
+	$(ANTORA_SPECMODULE)/pages/$(GENERATED)
 
 clean_antora:
-	echo rm -rf $(CLEAN_ANTORA_PATHS)
+	rm -rf $(CLEAN_ANTORA_PATHS)
 
