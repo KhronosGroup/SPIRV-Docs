@@ -38,8 +38,11 @@ ALL_DOCS=$(ALL_HTMLS) $(ALL_PDFS)
 
 all: $(ALL_DOCS)
 
+# Intermediate files generated dynamically if needed
+GENERATED_ADOC = binary.adoc GLSLGenerated.adoc OpenCLGenerated.adoc
+
 clean: clean_docs clean_antora
-	rm -f binary.adoc GLSLGenerated.adoc OpenCLGenerated.adoc
+	rm -f $(GENERATED_ADOC)
 	rm -f auto.*.adoc unified-version-info
 
 # Just remove generated HTML/PDF targets, not intermediate files
@@ -137,7 +140,6 @@ check:
 SCRIPTS   = $(CURDIR)/scripts
 MKDIR	  = mkdir -p
 
-HTMLDIR   = .
 GENERATED = generated
 PYXREFMAP = $(GENERATED)/xrefMap.py
 
@@ -146,10 +148,10 @@ PYXREFMAP = $(GENERATED)/xrefMap.py
 
 xrefMap: $(PYXREFMAP)
 
-$(PYXREFMAP): $(HTMLDIR)/SPIRV.html
+$(PYXREFMAP): SPIRV.html
 	$(MKDIR) $(GENERATED)
 	$(PYTHON) $(SCRIPTS)/map_html_anchors.py \
-	    $(HTMLDIR)/SPIRV.html -pyfile $(PYXREFMAP)
+	    SPIRV.html -pyfile $(PYXREFMAP)
 
 # Generate all Antora module content
 
@@ -172,7 +174,7 @@ ANTORA_EXTRAFILES = \
 	./images/*.png
 
 # The pageMap is copied, separately since antora-prep.py creates it.
-setup_spirv_antora pageMap: xrefMap spirv_nav_antora
+setup_spirv_antora pageMap: xrefMap spirv_nav_antora $(GENERATED_ADOC)
 	$(MKDIR) $(ANTORA_SPECMODULE)
 	ls -1 [A-Za-z]*.adoc $(ANTORA_EXTRAFILES) > $(ANTORA_FILELIST)
 	$(PYTHON) $(SCRIPTS)/antora-prep.py \

@@ -490,11 +490,12 @@ class DocFile:
             self.writeFile(self.dstpath)
         elif self.category == Pages:
             if pageHeaders is not None:
-                # Add blank lines before and after the pageHeaders to avoid
+                # Add whitespace after the pageHeaders to avoid
                 # coalescing with file content.
-                lines = self.lines[0:self.titleLine+1]
-                lines += ['\n'] + pageHeaders + ['\n']
-                lines = lines + self.lines[self.titleLine+1:]
+                lines = pageHeaders + ['\n'] + self.lines
+                #lines = self.lines[0:self.titleLine+1]
+                #lines += ['\n'] + pageHeaders + ['\n']
+                #lines = lines + self.lines[self.titleLine+1:]
                 self.lines = lines
 
             # Inject page headers immediately following page title
