@@ -11,7 +11,7 @@ asciidoc:
     stem: latexmath
     specs: partial$
     examples: partial$examples
-    images: image$
+    images: image$images
 # Not supported for SVG yet - see https://gitlab.com/antora/antora/-/issues/1001
 #    imageopts: inline
     imageopts: ''

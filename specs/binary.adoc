@@ -1,11 +1,14 @@
+// Needed for Antora rewrite script to treat file as a page, not a partial
+:antora-page-offset:
+
 [[Binary]]
-= Binary Form
+== Binary Form
 
 This section contains the exact form for all instructions, starting with the numerical values for all fields. See <<PhysicalLayout, Physical Layout>> for the order words appear in.
 
 
 [[Magic]]
-== Magic Number
+=== Magic Number
 Magic number for a SPIR-V module.
 
 TIP: *Endianness:* A module is defined as a stream of words, not a stream of bytes. However, if stored as a stream of bytes (e.g., in a file), the magic number can be used to deduce what endianness to apply to convert the byte stream back to a word stream.
@@ -16,10 +19,10 @@ TIP: *Endianness:* A module is defined as a stream of words, not a stream of byt
 |====
 
 [[Enumerants]]
-== Enumerants
+=== Enumerants
 
 [[Source_Language]]
-=== Source Language
+==== Source Language
 The source language is for debug purposes only, with no semantics that affect the meaning of other parts of the module.
 
 Used by <<OpSource,*OpSource*>>.
@@ -46,7 +49,7 @@ Used by <<OpSource,*OpSource*>>.
 |====
 
 [[Execution_Model]]
-=== Execution Model
+==== Execution Model
 Used by <<OpEntryPoint,*OpEntryPoint*>> and <<OpConditionalEntryPointINTEL,*OpConditionalEntryPointINTEL*>>.
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
@@ -99,7 +102,7 @@ Compute kernel. a|*Kernel*
 |====
 
 [[Addressing_Model]]
-=== Addressing Model
+==== Addressing Model
 Used by <<OpMemoryModel,*OpMemoryModel*>>.
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
@@ -120,7 +123,7 @@ Also see extensions: {spirv}/EXT/SPV_EXT_physical_storage_buffer.html[*SPV_EXT_p
 |====
 
 [[Memory_Model]]
-=== Memory Model
+==== Memory Model
 Used by <<OpMemoryModel,*OpMemoryModel*>>.
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
@@ -143,7 +146,7 @@ Also see extension: {spirv}/KHR/SPV_KHR_vulkan_memory_model.html[*SPV_KHR_vulkan
 |====
 
 [[Execution_Mode]]
-=== Execution Mode
+==== Execution Mode
 Declare the modes an <<EntryPoint,entry point>> executes in. All *Extra Operands* that are _<id>s_ must be the _<id>s_ of <<ConstantInstruction, constant instructions>> unless otherwise stated. It is invalid to apply the same execution mode more than once to any entry point unless explicitly allowed below for a specific execution mode.
 
 Used by <<OpExecutionMode,*OpExecutionMode*>> and <<OpExecutionModeId,*OpExecutionModeId*>>.
@@ -589,7 +592,7 @@ _Named Maximum Number of Registers_ a|*RegisterLimitsINTEL*
 |====
 
 [[Storage_Class]]
-=== Storage Class
+==== Storage Class
 Class of storage for declared variables. <<Intermediate, Intermediate values>> do not form a storage class, and unless stated otherwise, storage class-based restrictions are not restrictions on intermediate objects and their types.
 
 Used by:
@@ -709,7 +712,7 @@ Also see extension: *SPV_INTEL_function_pointers*
 |====
 
 [[Dim]]
-=== Dim
+==== Dim
 Dimensionality of an image. Some uses require capabilities beyond the enabling capabilities, for example where the type's _Sampled_ operand is 2, or _Arrayed_ operand is 1. See the <<Capabilities,capabilities>> section for more detail. 
 
 Used by <<OpTypeImage,*OpTypeImage*>>.
@@ -730,7 +733,7 @@ Used by <<OpTypeImage,*OpTypeImage*>>.
 |====
 
 [[Sampler_Addressing_Mode]]
-=== Sampler Addressing Mode
+==== Sampler Addressing Mode
 Addressing mode for creating constant samplers.
 
 Used by <<OpConstantSampler,*OpConstantSampler*>>.
@@ -751,7 +754,7 @@ Flip the image coordinate at every integer junction. Must only be used with norm
 |====
 
 [[Sampler_Filter_Mode]]
-=== Sampler Filter Mode
+==== Sampler Filter Mode
 Filter mode for creating constant samplers.
 
 Used by <<OpConstantSampler,*OpConstantSampler*>>.
@@ -766,7 +769,7 @@ Use filter linear mode when performing a read image operation. a|
 |====
 
 [[Image_Format]]
-=== Image Format
+==== Image Format
 Declarative image format.
 
 Used by <<OpTypeImage,*OpTypeImage*>>.
@@ -819,7 +822,7 @@ Used by <<OpTypeImage,*OpTypeImage*>>.
 |====
 
 [[Image_Channel_Order]]
-=== Image Channel Order
+==== Image Channel Order
 The image channel orders that result from <<OpImageQueryOrder,*OpImageQueryOrder*>>.
 
 // PrintImmediateHeader
@@ -849,7 +852,7 @@ The image channel orders that result from <<OpImageQueryOrder,*OpImageQueryOrder
 |====
 
 [[Image_Channel_Data_Type]]
-=== Image Channel Data Type
+==== Image Channel Data Type
 Image channel data types that result from <<OpImageQueryFormat,*OpImageQueryFormat*>>.
 
 // PrintImmediateHeader
@@ -885,7 +888,7 @@ Image channel data types that result from <<OpImageQueryFormat,*OpImageQueryForm
 |====
 
 [[Image_Operands]]
-=== Image Operands
+==== Image Operands
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -993,7 +996,7 @@ Hints that the accessed texels are not likely to be accessed again in the near f
 |====
 
 [[FP_Fast_Math_Mode]]
-=== FP Fast Math Mode
+==== FP Fast Math Mode
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -1034,7 +1037,7 @@ Allow algebraic transformations according to real-number associative and distrib
 |====
 
 [[FP_Rounding_Mode]]
-=== FP Rounding Mode
+==== FP Rounding Mode
 Associate a rounding mode to a floating-point conversion instruction.
 
 
@@ -1054,7 +1057,7 @@ Round towards negative infinity. a|
 |====
 
 [[Linkage_Type]]
-=== Linkage Type
+==== Linkage Type
 Associate a linkage type to functions or global variables. See <<Linkage, linkage>>.
 
 // PrintImmediateHeader
@@ -1076,7 +1079,7 @@ Also see extension: {spirv}/KHR/SPV_KHR_linkonce_odr.html[*SPV_KHR_linkonce_odr*
 |====
 
 [[Access_Qualifier]]
-=== Access Qualifier
+==== Access Qualifier
 Defines the access permissions.
 
 
@@ -1095,7 +1098,7 @@ A readable and writable object. a|*Kernel*
 |====
 
 [[Function_Parameter_Attribute]]
-=== Function Parameter Attribute
+==== Function Parameter Attribute
 Adds additional information to the return type and to each parameter of a function. 
 
 Only one of *Zext* and *Sext* can be used to decorate the same _<id>_, and no attribute may be used multiple times on the same _<id>_. Otherwise, multiple function parameter attributes can be applied to the same _<id>_.
@@ -1124,7 +1127,7 @@ The parameter is not dereferenced, either to read or write the memory pointed to
 |====
 
 [[Decoration]]
-=== Decoration
+==== Decoration
 Decorations add additional information to an _<id>_ or member of a structure. 
 
 It is invalid to decorate any given _<id>_ or structure member more than one time with the same <<Decoration, decoration>>, unless explicitly allowed below for a specific decoration.
@@ -1762,7 +1765,7 @@ _Intrinsic ID_ a|*IntrinsicSAMSUNG*
 |====
 
 [[BuiltIn]]
-=== BuiltIn
+==== BuiltIn
 Used when <<Decoration,*Decoration*>> is *BuiltIn*. Apply to:
 
  - The result _<id>_ of the *OpVariable* declaration of the built-in variable,
@@ -2282,7 +2285,7 @@ Also see extension: {spirv}/KHR/SPV_KHR_ray_cull_mask.html[*SPV_KHR_ray_cull_mas
 |====
 
 [[Selection_Control]]
-=== Selection Control
+==== Selection Control
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -2299,7 +2302,7 @@ Performance hint. Strong request to keep this selection as control flow. a|
 |====
 
 [[Loop_Control]]
-=== Loop Control
+==== Loop Control
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -2374,7 +2377,7 @@ This must not be used with the *DontUnroll* bit. a|<<Unified, Missing before>> *
 |====
 
 [[Function_Control]]
-=== Function Control
+==== Function Control
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -2398,7 +2401,7 @@ Compiler assumes this function has no side effects, and does not access global m
 |====
 
 [[Memory_Semantics_-id-]]
-=== Memory Semantics <id>
+==== Memory Semantics <id>
 
 The _<id>_'s value is a mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -2494,7 +2497,7 @@ Also see extension: {spirv}/KHR/SPV_KHR_vulkan_memory_model.html[*SPV_KHR_vulkan
 |====
 
 [[Memory_Operands]]
-=== Memory Operands
+==== Memory Operands
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -2564,7 +2567,7 @@ Also see extension: *SPV_INTEL_memory_access_aliasing*
 |====
 
 [[Scope_-id-]]
-=== Scope <id>
+==== Scope <id>
 Must be an _<id>_ of a 32-bit integer scalar. Its value is expected to be one of the values in the table below. If validation rules or the client API require a constant _<id>_, it is invalid for it to not be one of these values. If non-constant _<id>_ are allowed, <<UndefinedBehavior,behavior is undefined>> if _<id>_ is not one of these values. 
 
 If labeled as a memory scope, it specifies the distance of synchronization from the current <<Invocation,invocation>>. If labeled as an execution scope, it specifies the set of executing invocations taking part in the operation. Other usages (neither memory nor execution) of scope are possible, and each such usage defines what scope means in its context.
@@ -2695,7 +2698,7 @@ Scope is the current queue family. a|*VulkanMemoryModel*
 |====
 
 [[Group_Operation]]
-=== Group Operation
+==== Group Operation
 Defines the class of operation for <<Group, group>> and <<Non-Uniform, non-uniform group>> instructions.
 
 Used by:
@@ -2768,7 +2771,7 @@ A binary operation with an identity _I_ and _n_ (where _n_ is the size of the wo
 |====
 
 [[Kernel_Enqueue_Flags]]
-=== Kernel Enqueue Flags
+==== Kernel Enqueue Flags
 Specify when the child kernel begins execution. 
 
 *Note:* Implementations are not required to honor this flag. Implementations may not schedule kernel launch earlier than the point specified by this flag, however. Used by <<OpEnqueueKernel,*OpEnqueueKernel*>>.
@@ -2790,7 +2793,7 @@ Indicates that the enqueued kernels wait only for the workgroup that enqueued th
 |====
 
 [[Kernel_Profiling_Info]]
-=== Kernel Profiling Info
+==== Kernel Profiling Info
 
 The _<id>_'s value is a mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -2806,7 +2809,7 @@ Indicates that the profiling info queried is the execution time. a|*Kernel*
 |====
 
 [[Capability]]
-=== Capability
+==== Capability
 Capabilities a module can declare it uses. 
 
 All used capabilities need to be declared, either explicitly with <<OpCapability, *OpCapability*>> or implicitly through the *Implicitly Declares* column: If a capability defined with <<ValidDefined, statically expressed rules>> is used, it is invalid to not declare it. If a capability defined in terms of dynamic behavior is used, <<UndefinedBehavior,behavior is undefined>> unless the capability is declared. The *Implicitly Declares* column lists additional capabilities that are all implicitly declared when the *Capability* entry is explicitly or implicitly declared. It is not necessary, but allowed, to explicitly declare an implicitly declared capability. 
@@ -3938,7 +3941,7 @@ Also see extension: {spirv}/SAMSUNG/SPV_SAMSUNG_intrinsic.html[*SPV_SAMSUNG_intr
 |====
 
 [[Ray_Flags]]
-=== Ray Flags
+==== Ray Flags
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -3983,7 +3986,7 @@ This is a literal mask; it can be formed by combining the bits from multiple row
 |====
 
 [[Ray_Query_Intersection]]
-=== Ray Query Intersection
+==== Ray Query Intersection
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -3997,7 +4000,7 @@ This is a literal mask; it can be formed by combining the bits from multiple row
 |====
 
 [[Ray_Query_Committed_Type]]
-=== Ray Query Committed Type
+==== Ray Query Committed Type
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4014,7 +4017,7 @@ This is a literal mask; it can be formed by combining the bits from multiple row
 |====
 
 [[Ray_Query_Candidate_Type]]
-=== Ray Query Candidate Type
+==== Ray Query Candidate Type
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4028,7 +4031,7 @@ This is a literal mask; it can be formed by combining the bits from multiple row
 |====
 
 [[Fragment_Shading_Rate]]
-=== Fragment Shading Rate
+==== Fragment Shading Rate
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -4052,7 +4055,7 @@ This is a literal mask; it can be formed by combining the bits from multiple row
 |====
 
 [[FP_Denorm_Mode]]
-=== FP Denorm Mode
+==== FP Denorm Mode
 Floating point denormalized handling mode.
 
 // PrintImmediateHeader
@@ -4068,7 +4071,7 @@ Floating point denormalized handling mode.
 |====
 
 [[FP_Operation_Mode]]
-=== FP Operation Mode
+==== FP Operation Mode
 Floating point operation mode.
 
 // PrintImmediateHeader
@@ -4084,7 +4087,7 @@ Floating point operation mode.
 |====
 
 [[Quantization_Mode]]
-=== Quantization Mode
+==== Quantization Mode
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4116,7 +4119,7 @@ Floating point operation mode.
 |====
 
 [[Overflow_Mode]]
-=== Overflow Mode
+==== Overflow Mode
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4136,7 +4139,7 @@ Floating point operation mode.
 |====
 
 [[Packed_Vector_Format]]
-=== Packed Vector Format
+==== Packed Vector Format
 Used by:
 
 - <<OpSDot,*OpSDot*>>
@@ -4158,7 +4161,7 @@ Also see extension: {spirv}/KHR/SPV_KHR_integer_dot_product.html[*SPV_KHR_intege
 |====
 
 [[Cooperative_Matrix_Operands]]
-=== Cooperative Matrix Operands
+==== Cooperative Matrix Operands
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -4176,7 +4179,7 @@ Used by <<OpCooperativeMatrixMulAddKHR,*OpCooperativeMatrixMulAddKHR*>>, <<OpCoo
 |====
 
 [[Cooperative_Matrix_Layout]]
-=== Cooperative Matrix Layout
+==== Cooperative Matrix Layout
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4192,7 +4195,7 @@ Used by <<OpCooperativeMatrixMulAddKHR,*OpCooperativeMatrixMulAddKHR*>>, <<OpCoo
 |====
 
 [[Cooperative_Matrix_Use]]
-=== Cooperative Matrix Use
+==== Cooperative Matrix Use
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4203,7 +4206,7 @@ Used by <<OpCooperativeMatrixMulAddKHR,*OpCooperativeMatrixMulAddKHR*>>, <<OpCoo
 |====
 
 [[Cooperative_Matrix_Reduce_Mode]]
-=== Cooperative Matrix Reduce Mode
+==== Cooperative Matrix Reduce Mode
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -4219,7 +4222,7 @@ Used by <<OpCooperativeMatrixReduceEXT,*OpCooperativeMatrixReduceEXT*>>.
 |====
 
 [[Tensor_Clamp_Mode]]
-=== Tensor Clamp Mode
+==== Tensor Clamp Mode
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4232,7 +4235,7 @@ Used by <<OpCooperativeMatrixReduceEXT,*OpCooperativeMatrixReduceEXT*>>.
 |====
 
 [[Tensor_Addressing_Operands]]
-=== Tensor Addressing Operands
+==== Tensor Addressing Operands
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -4254,7 +4257,7 @@ Used by <<OpCooperativeMatrixLoadTensorNV,*OpCooperativeMatrixLoadTensorNV*>> an
 |====
 
 [[Tensor_Operands]]
-=== Tensor Operands
+==== Tensor Operands
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -4282,7 +4285,7 @@ Used by <<OpTensorReadARM,*OpTensorReadARM*>> and <<OpTensorWriteARM,*OpTensorWr
 |====
 
 [[Initialization_Mode_Qualifier]]
-=== Initialization Mode Qualifier
+==== Initialization Mode Qualifier
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4296,7 +4299,7 @@ Used by <<OpTensorReadARM,*OpTensorReadARM*>> and <<OpTensorWriteARM,*OpTensorWr
 |====
 
 [[Host_Access_Qualifier]]
-=== Host Access Qualifier
+==== Host Access Qualifier
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4316,7 +4319,7 @@ Used by <<OpTensorReadARM,*OpTensorReadARM*>> and <<OpTensorWriteARM,*OpTensorWr
 |====
 
 [[Load_Cache_Control]]
-=== Load Cache Control
+==== Load Cache Control
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4339,7 +4342,7 @@ Used by <<OpTensorReadARM,*OpTensorReadARM*>> and <<OpTensorWriteARM,*OpTensorWr
 |====
 
 [[Store_Cache_Control]]
-=== Store Cache Control
+==== Store Cache Control
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4359,7 +4362,7 @@ Used by <<OpTensorReadARM,*OpTensorReadARM*>> and <<OpTensorWriteARM,*OpTensorWr
 |====
 
 [[Named_Maximum_Number_of_Registers]]
-=== Named Maximum Number of Registers
+==== Named Maximum Number of Registers
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4370,7 +4373,7 @@ Used by <<OpTensorReadARM,*OpTensorReadARM*>> and <<OpTensorWriteARM,*OpTensorWr
 |====
 
 [[Matrix_Multiply_Accumulate_Operands]]
-=== Matrix Multiply Accumulate Operands
+==== Matrix Multiply Accumulate Operands
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -4397,7 +4400,7 @@ Used by <<OpSubgroupMatrixMultiplyAccumulateINTEL,*OpSubgroupMatrixMultiplyAccum
 |====
 
 [[Raw_Access_Chain_Operands]]
-=== Raw Access Chain Operands
+==== Raw Access Chain Operands
 
 This is a literal mask; it can be formed by combining the bits from multiple rows in the table below.
 
@@ -4416,7 +4419,7 @@ Used by <<OpRawAccessChainNV,*OpRawAccessChainNV*>>.
 |====
 
 [[FP_Encoding]]
-=== FP Encoding
+==== FP Encoding
 Specifies an alternative floating point encoding. 
 
 The _Width(s)_ column specifies the set of valid width the encoding operand can be used with. If no value is provided, the valid widths for the operand are defined by the client API. Otherwise, the _Width_ operand of <<OpTypeFloat, *OpTypeFloat*>> must match one the specified values.
@@ -4461,7 +4464,7 @@ Used by <<OpTypeFloat,*OpTypeFloat*>>.
 |====
 
 [[Cooperative_Vector_Matrix_Layout]]
-=== Cooperative Vector Matrix Layout
+==== Cooperative Vector Matrix Layout
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4473,7 +4476,7 @@ Used by <<OpTypeFloat,*OpTypeFloat*>>.
 |====
 
 [[Cooperative_Vector_Matrix_Component_Type]]
-=== Cooperative Vector Matrix Component Type
+==== Cooperative Vector Matrix Component Type
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4496,7 +4499,7 @@ Used by <<OpTypeFloat,*OpTypeFloat*>>.
 |====
 
 [[Gather_Modes]]
-=== Gather Modes
+==== Gather Modes
 // PrintImmediateHeader
 [cols="^.^2,16a,15",role="fixedtable",options="header",width = "100%"]
 |====
@@ -4509,7 +4512,7 @@ Used by <<OpTypeFloat,*OpTypeFloat*>>.
 <<<
 
 [[Instructions]]
-== Instructions
+=== Instructions
 Form for each instruction:
 [cols="4*1",width="70%"]
 |=====
@@ -4528,7 +4531,7 @@ _Operands_, when present, are any literals, other instruction's _Result <id>_, e
 | <<WordCount,_Word Count_>> | _Opcode_ | _Results_ | _Operands_
 |=====
 [[Miscellaneous]]
-=== Miscellaneous Instructions
+==== Miscellaneous Instructions
 [%unbreakable,cols="2,1",role="fixedtable",width="100%"]
 |=====
 1+a|[[OpNop]]*OpNop* +
@@ -4677,7 +4680,7 @@ _Target_
 |=====
 <<<
 [[Debug]]
-=== Debug Instructions
+==== Debug Instructions
 [%unbreakable,cols="3,2,1*3",role="fixedtable",width="100%"]
 |=====
 2+a|[[OpSourceContinued]]*OpSourceContinued* +
@@ -4825,7 +4828,7 @@ _Process_
 |=====
 <<<
 [[Annotation]]
-=== Annotation Instructions
+==== Annotation Instructions
 [%unbreakable,cols="3,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpDecorate]]*OpDecorate* +
@@ -4990,7 +4993,7 @@ See <<Decoration,_Decoration_>>.
 |=====
 <<<
 [[Extension]]
-=== Extension Instructions
+==== Extension Instructions
 [%unbreakable,cols="3,2,1*3",role="fixedtable",width="100%"]
 |=====
 2+a|[[OpExtension]]*OpExtension* +
@@ -5073,7 +5076,7 @@ _Name_
 |=====
 <<<
 [[Mode-Setting]]
-=== Mode-Setting Instructions
+==== Mode-Setting Instructions
 [%unbreakable,cols="1,2,2*3",role="fixedtable",width="100%"]
 |=====
 3+a|[[OpMemoryModel]]*OpMemoryModel* +
@@ -5198,7 +5201,7 @@ _Capability_
 |=====
 <<<
 [[Type-Declaration]]
-=== Type-Declaration Instructions
+==== Type-Declaration Instructions
 [%unbreakable,cols="1,2,1*3",role="fixedtable",width="100%"]
 |=====
 2+a|[[OpTypeVoid]]*OpTypeVoid* +
@@ -5778,7 +5781,7 @@ _Member 0 type, member 1 type, ..._
 |=====
 <<<
 [[Constant-Creation]]
-=== Constant-Creation Instructions
+==== Constant-Creation Instructions
 [%unbreakable,cols="1,2,2*3",role="fixedtable",width="100%"]
 |=====
 3+a|[[OpConstantTrue]]*OpConstantTrue* +
@@ -6166,7 +6169,7 @@ _Capabilities_
 |=====
 <<<
 [[Memory]]
-=== Memory Instructions
+==== Memory Instructions
 [%unbreakable,cols="3,2,4*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpVariable]]*OpVariable* +
@@ -6906,7 +6909,7 @@ _Mask_
 |=====
 <<<
 [[Function]]
-=== Function Instructions
+==== Function Instructions
 [%unbreakable,cols="1,2,4*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpFunction]]*OpFunction* +
@@ -7004,7 +7007,7 @@ _Operands_
 |=====
 <<<
 [[Image]]
-=== Image Instructions
+==== Image Instructions
 [%unbreakable,cols="1,2,4*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpSampledImage]]*OpSampledImage* +
@@ -8084,7 +8087,7 @@ _Operand_
 |=====
 <<<
 [[Conversion]]
-=== Conversion Instructions
+==== Conversion Instructions
 [%unbreakable,cols="1,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpConvertFToU]]*OpConvertFToU* +
@@ -8493,7 +8496,7 @@ _Float Value_
 |=====
 <<<
 [[Composite]]
-=== Composite Instructions
+==== Composite Instructions
 [%unbreakable,cols="1,2,4*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpVectorExtractDynamic]]*OpVectorExtractDynamic* +
@@ -8763,7 +8766,7 @@ Condition 1, Operand 1, +
 |=====
 <<<
 [[Arithmetic]]
-=== Arithmetic Instructions
+==== Arithmetic Instructions
 [%unbreakable,cols="1,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpSNegate]]*OpSNegate* +
@@ -9518,7 +9521,7 @@ _Operand 3_
 |=====
 <<<
 [[Bit]]
-=== Bit Instructions
+==== Bit Instructions
 [%unbreakable,cols="1,2,4*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpShiftRightLogical]]*OpShiftRightLogical* +
@@ -9784,7 +9787,7 @@ _LUTIndex_
 |=====
 <<<
 [[Relational_and_Logical]]
-=== Relational and Logical Instructions
+==== Relational and Logical Instructions
 [%unbreakable,cols="1,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpAny]]*OpAny* +
@@ -10497,7 +10500,7 @@ _Operand 2_
 |=====
 <<<
 [[Derivative]]
-=== Derivative Instructions
+==== Derivative Instructions
 [%unbreakable,cols="1,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpDPdx]]*OpDPdx* +
@@ -10689,7 +10692,7 @@ _P_
 |=====
 <<<
 [[Control-Flow]]
-=== Control-Flow Instructions
+==== Control-Flow Instructions
 [%unbreakable,cols="3,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpPhi]]*OpPhi* +
@@ -10971,7 +10974,7 @@ This instruction is only valid in the *Fragment* <<Execution_Model, Execution Mo
 |=====
 <<<
 [[Atomic]]
-=== Atomic Instructions
+==== Atomic Instructions
 [%unbreakable,cols="1,2,5*3",role="fixedtable",width="100%"]
 |=====
 5+a|[[OpAtomicLoad]]*OpAtomicLoad* +
@@ -11489,7 +11492,7 @@ _Value_
 |=====
 <<<
 [[Primitive]]
-=== Primitive Instructions
+==== Primitive Instructions
 [%unbreakable,cols="2,1",role="fixedtable",width="100%"]
 |=====
 1+a|[[OpEmitVertex]]*OpEmitVertex* +
@@ -11550,7 +11553,7 @@ _Stream_
 |=====
 <<<
 [[Barrier]]
-=== Barrier Instructions
+==== Barrier Instructions
 [%unbreakable,cols="1,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpControlBarrier]]*OpControlBarrier* +
@@ -11665,7 +11668,7 @@ _Semantics_
 |=====
 <<<
 [[Group]]
-=== Group and Subgroup Instructions
+==== Group and Subgroup Instructions
 [%unbreakable,cols="1,2,8*3",role="fixedtable",width="100%"]
 |=====
 7+a|[[OpGroupAsyncCopy]]*OpGroupAsyncCopy* +
@@ -12775,7 +12778,7 @@ _X_
 |=====
 <<<
 [[Device-Side_Enqueue]]
-=== Device-Side Enqueue Instructions
+==== Device-Side Enqueue Instructions
 [%unbreakable,cols="1,2,6*3",role="fixedtable",width="100%"]
 |=====
 6+a|[[OpEnqueueMarker]]*OpEnqueueMarker* +
@@ -13208,7 +13211,7 @@ _Param Align_
 |=====
 <<<
 [[Pipe]]
-=== Pipe Instructions
+==== Pipe Instructions
 [%unbreakable,cols="1,2,6*3",role="fixedtable",width="100%"]
 |=====
 6+a|[[OpReadPipe]]*OpReadPipe* +
@@ -13694,7 +13697,7 @@ _Pipe Storage_
 |=====
 <<<
 [[Non-Uniform]]
-=== Non-Uniform Instructions
+==== Non-Uniform Instructions
 [%unbreakable,cols="1,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpGroupNonUniformElect]]*OpGroupNonUniformElect* +
@@ -14788,7 +14791,7 @@ _Value_
 |=====
 <<<
 [[Tensor]]
-=== Tensor Instructions
+==== Tensor Instructions
 [%unbreakable,cols="3,2,5*3",role="fixedtable",width="100%"]
 |=====
 5+a|[[OpTensorReadARM]]*OpTensorReadARM* +
@@ -14843,7 +14846,7 @@ _Dimension_
 |=====
 <<<
 [[Graph]]
-=== Graph Instructions
+==== Graph Instructions
 [%unbreakable,cols="1,2,3*3",role="fixedtable",width="100%"]
 |=====
 4+a|[[OpGraphConstantARM]]*OpGraphConstantARM* +
@@ -14936,7 +14939,7 @@ Reserved.
 |=====
 <<<
 [[Reserved]]
-=== Reserved Instructions
+==== Reserved Instructions
 [%unbreakable,cols="1,2,11*3",role="fixedtable",width="100%"]
 |=====
 10+a|[[OpTraceRayKHR]]*OpTraceRayKHR* +

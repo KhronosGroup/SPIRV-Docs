@@ -5,13 +5,6 @@
 // just all being included from other places currently.
 include::{specs}/intro.adoc[]
 
-// Each chapter starts with markup for heading level 0, which allows them to
-// be used as the basis for the Antora form of the specification output.
-// In the asciidoctor build the chapters must have their heading levels
-// increased by one, since they are included from this file.
-
-:leveloffset: +1
-
 // "<<<" means use a page break when going to PDF or printer
 <<<
 include::{specs}/specification.adoc[]
@@ -21,5 +14,3 @@ include::{specs}/binary.adoc[]
 
 <<<
 include::{specs}/changes.adoc[]
-
-:leveloffset: -1

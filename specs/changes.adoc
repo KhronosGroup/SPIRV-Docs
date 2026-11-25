@@ -1,10 +1,9 @@
 // Copyright 2015-2026 The Khronos Group Inc.
 // SPDX-License-Identifier: CC-BY-4.0
 
-= Appendix A: Changes
+// Needed for Antora rewrite script to treat file as a page, not a partial
+:antora-page-offset:
 
-:leveloffset: -1
+== Appendix A: Changes
 
 include::{specs}/auto.changes.adoc[]
-
-:leveloffset: +1

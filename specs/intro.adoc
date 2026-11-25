@@ -1,6 +1,9 @@
 // Copyright 2015-2026 The Khronos Group Inc.
 // SPDX-License-Identifier: CC-BY-4.0
 
+// Needed for Antora rewrite script to treat file as a page, not a partial
+:antora-page-offset:
+
 :main-spec:
 = SPIR-V Specification
 :tmtitle: pass:q,r[^™^]
