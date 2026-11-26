@@ -4,6 +4,7 @@
 // Needed for Antora rewrite script to treat file as a page, not a partial
 :antora-page-offset:
 
+[[changes]]
 == Appendix A: Changes
 
 include::{specs}/auto.changes.adoc[]

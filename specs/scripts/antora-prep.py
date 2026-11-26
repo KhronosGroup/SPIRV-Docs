@@ -104,7 +104,10 @@ def write_cjs_dictionary(filename, dictionary, varname = 'exports.pageMap'):
 
 def write_python_dictionary(filename, dictionary, varname = 'pageMap'):
     try:
-        fp = open(filename, 'w', encoding='utf8')
+        if filename != sys.stdout:
+            fp = open(filename, 'w', encoding='utf8')
+        else:
+            fp = filename
     except:
         raise RuntimeError(f'Cannot open page map .py file {filename}')
 
@@ -117,7 +120,8 @@ def write_python_dictionary(filename, dictionary, varname = 'pageMap'):
         print(f'    {pyquote(pageAnchor)} : {pyquote(pageName)},', file=fp)
     print('}', file=fp)
 
-    fp.close()
+    if fp != sys.stdout:
+        fp.close()
 
 # Track anchors we could not rewrite so they are only reported once
 unresolvedAnchors = set()
@@ -131,6 +135,11 @@ def mapAnchor(anchor, title, pageMap, xrefMap, module, closeAnchor):
         - pageMap, xrefMap, module - per rewriteXrefs below
         - closeAnchor - True if closing >> is on this line, False otherwise
     """
+
+    #if anchor == 'ClientAPI':
+    #    write_python_dictionary(sys.stdout, pageMap)
+    #    import pdb
+    #    pdb.set_trace()
 
     # Determine which page anchor this anchor comes from.
     # If it cannot be determined, use the unmapped anchor.
@@ -152,8 +161,6 @@ def mapAnchor(anchor, title, pageMap, xrefMap, module, closeAnchor):
 
         # Page the page anchor comes from
         pageName = pageMap[pageAnchor]
-
-        # print(f'mapAnchor: anchor {anchor} pageAnchor {pageAnchor} -> module {module} pageName = {pageName}')
 
         xref = f'{module}{pageName}#{anchor}'
     except:
@@ -417,7 +424,9 @@ class DocFile:
             # including remapping the anchor.
 
             # First, complete xrefs with alt-text (<<anchor, text>>)
-            (line, count) = re.subn(r'<<([^,>]*),([^>]+)>>',
+            # The text RE allows any string up to '>>', which ends the
+            # anchor text.
+            (line, count) = re.subn(r'<<([^,>]*),(([^>]|>[^>])+)>>',
                 lambda match: replaceAnchorText(match, pageMap, xrefMap, module),
                 line)
 
@@ -429,7 +438,7 @@ class DocFile:
             # Finally, if there is a trailing '<<anchor,' at EOL, remap it
             # and set the flag so the terminating '>>' on the next line will
             # be mapped into an xref closing ']'.
-            (line, count) = re.subn(r'<<([^,>]*),([^>]*)$',
+            (line, count) = re.subn(r'<<([^,>]*),(([^>]|>[^>])*)',
                 lambda match: replaceAnchorTrailingText(match, pageMap, xrefMap, module),
                 line)
             if count > 0:
@@ -702,9 +711,9 @@ if __name__ == '__main__':
 
     for (path, docFile) in pageInfo.items():
         if path.endswith('.adoc'):
-            # Look for <<>>-style anchors and rewrite them to Antora xref-style
-            # anchors using the pageMap (of top-level anchors to page names) and
-            # xrefMap (of anchors to top-level anchors).
+            # Look for <<>>-style xrefs and rewrite them to Antora xref:
+            # links using the pageMap (of top-level anchors to page names)
+            # and xrefMap (of anchors to top-level anchors).
             # Additionally, qualify xrefs with the module name.
             # This may be an explicit module name, e.g. 'spec:', or
             # an asciidoctor attribute name, e.g. '{specmodule}:' that is

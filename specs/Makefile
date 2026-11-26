@@ -182,6 +182,7 @@ setup_spirv_antora pageMap: xrefMap spirv_nav_antora $(GENERATED_ADOC)
 	    -component $(shell realpath $(ANTORA_SPECMODULE)) \
 	    -pageHeaders antora/pageHeaders-spirv.adoc \
 	    -xrefMap $(PYXREFMAP) \
+	    -pypagemap pageMap.py \
 	    -filelist $(ANTORA_FILELIST)
 
 # Construct the SPIR-V component nav.adoc

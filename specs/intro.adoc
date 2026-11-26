@@ -5,6 +5,7 @@
 :antora-page-offset:
 
 :main-spec:
+[[intro]]
 = SPIR-V Specification
 :tmtitle: pass:q,r[^™^]
 :regtitle: pass:q,r[^®^]
