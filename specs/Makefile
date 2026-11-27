@@ -167,16 +167,19 @@ ANTORA_SPECMODULE = antora/modules/ROOT
 # in a separate file.
 ANTORA_FILELIST = $(GENERATED)/antoraFileList.txt
 
-# Additional individual files to include - config (copyright), attributes, images, etc.
-ANTORA_EXTRAFILES = \
-	./examples/* \
-	./images/*.svg \
-	./images/*.png
+# Specification source files to be processed for Antora.
+# Does not include the top-level SPIR-V specification frontmatter and
+# titles.
+ANTORA_SOURCEFILES = \
+	$(filter-out SPIRV.adoc, $(wildcard [A-Za-z]*.adoc)) \
+	$(wildcard examples/*) \
+	$(wildcard images/*.svg) \
+	$(wildcard images/*.png)
 
 # The pageMap is copied, separately since antora-prep.py creates it.
 setup_spirv_antora pageMap: xrefMap spirv_nav_antora $(GENERATED_ADOC)
 	$(MKDIR) $(ANTORA_SPECMODULE)
-	ls -1 [A-Za-z]*.adoc $(ANTORA_EXTRAFILES) > $(ANTORA_FILELIST)
+	echo $(ANTORA_SOURCEFILES) | tr ' ' '\n' > $(ANTORA_FILELIST)
 	$(PYTHON) $(SCRIPTS)/antora-prep.py \
 	    -root . \
 	    -component $(shell realpath $(ANTORA_SPECMODULE)) \
