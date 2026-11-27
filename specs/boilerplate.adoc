@@ -1,9 +1,11 @@
 :title-logo-image: {images}/Khronos_500px_June18.png
+ifndef::site-gen-antora[]
 :numbered:
 :toc: left
 :toc2:
 :toclevels: 3
 :table-stripes: even
+endif::site-gen-antora[]
 
 ifdef::backend-html5[]
 image::{images}/Khronos_500px_June18.png[width=600,align=center]

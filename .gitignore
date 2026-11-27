@@ -3,7 +3,12 @@
 
 tools/spirv/build
 tools/buildHeaders/build
+__pycache__
 tags
+specs/antora/modules/ROOT/images
+specs/antora/modules/ROOT/partials
+specs/antora/modules/ROOT/pages
+!specs/antora/modules/ROOT/pages/index.adoc
 specs/GLSL.std.450.html
 specs/GLSL.std.450.pdf
 specs/GLSL.std.450.xml

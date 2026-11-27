@@ -5203,7 +5203,10 @@ void PrintDoc()
 {
     ParameterizeSpec();
 
-    printf("[[Binary]]\n== Binary Form\n");
+
+    printf("// Needed for Antora rewrite script to treat file as a page, not a partial\n");
+    printf(":antora-page-offset:\n\n");
+    printf("[[Binary]]\n== Binary Form\n\n");
 
     printf("This section contains the exact form for all instructions, starting with the numerical values for all fields. "
            "See <<PhysicalLayout, Physical Layout>> for the order words appear in.\n\n");

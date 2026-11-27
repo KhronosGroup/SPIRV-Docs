@@ -123,7 +123,8 @@ defining it) are generally not allowed, except for the following exceptions:
 
 == Enumerations
 
-=== Instruction Enumeration [[InstEnum]]
+[[InstEnum]]
+=== Instruction Enumeration
 
 [cols="^1,7",options="header", width="50%"]
 |======
@@ -168,7 +169,8 @@ defining it) are generally not allowed, except for the following exceptions:
 |======
 
 
-=== Debug Info Flags [[DebugFlags]]
+[[DebugFlags]]
+=== Debug Info Flags
 
 [cols="^4,8",options="header", width="50%"]
 |======
@@ -194,7 +196,8 @@ defining it) are generally not allowed, except for the following exceptions:
 |======
 
 
-=== Base Type Attribute Encodings [[BaseTypeAttributeEncoding]]
+[[BaseTypeAttributeEncoding]]
+=== Base Type Attribute Encodings
 
 Used by <<DebugTypeBasic,*DebugTypeBasic*>> +
 
@@ -211,7 +214,9 @@ Used by <<DebugTypeBasic,*DebugTypeBasic*>> +
 | 7 | *UnsignedChar*
 |======
 
-=== Composite Types [[CompositeTypes]]
+[[CompositeTypes]]
+=== Composite Types
+
 Used by <<DebugTypeComposite,*DebugTypeComposite*>> +
 
 [cols="^1,10",options="header",width = "50%"]
@@ -222,7 +227,9 @@ Used by <<DebugTypeComposite,*DebugTypeComposite*>> +
 | 2 | *Union*
 |======
 
-=== Type Qualifiers [[TypeQualifiers]]
+[[TypeQualifiers]]
+=== Type Qualifiers
+
 Used by <<DebugTypeQualifier,*DebugTypeQualifier*>> +
 
 [cols="^1,10",options="header",width = "50%"]
@@ -234,7 +241,9 @@ Used by <<DebugTypeQualifier,*DebugTypeQualifier*>> +
 | 3 | *AtomicType*
 |======
 
-=== Debug Operations [[Operation]]
+[[Operation]]
+=== Debug Operations
+
 These operations are used to form a DWARF expression.
 Such expressions provide information about the current location
 (described by <<DebugDeclare,*DebugDeclare*>>) or value
@@ -264,7 +273,9 @@ Used by <<DebugOperation,*DebugOperation*>> +
 | 9 | *Fragment*         | 2               | Has the same semantics as *BitPiece*, but the _offset_ operand defines location within the source variable.
 |======
 
-=== Imported Entities [[ImportedEntities]]
+[[ImportedEntities]]
+=== Imported Entities
+
 Used by <<DebugImportedEntity,*DebugImportedEntity*>> +
 
 [cols="^1,10",options="header",width = "50%"]

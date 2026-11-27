@@ -1,6 +1,9 @@
 // Copyright 2015-2026 The Khronos Group Inc.
 // SPDX-License-Identifier: CC-BY-4.0
 
+// Needed for Antora rewrite script to treat file as a page, not a partial
+:antora-page-offset:
+
 [[Specification]]
 == Specification
 
@@ -475,11 +478,11 @@ to look.
 These are expressed using terms like _must_, _must not_, _valid_,
 _not valid_, and _invalid_.
 Such rules establish whether the module is classified as valid or not valid,
-which in turn provides terms that tools may use in labeling and describing 
+which in turn provides terms that tools may use in labeling and describing
 modules they process.
-A module is valid only if it does not violate any of these statically 
+A module is valid only if it does not violate any of these statically
 expressed rules.
-Such rules might not be considered violated if a specialization constant is 
+Such rules might not be considered violated if a specialization constant is
 involved, as described in the <<SpecializationSection, specialization
 constant section>>.
 
@@ -489,7 +492,7 @@ Tools may be able to deduce from a static module that <<UndefinedBehavior,
 behavior will be undefined>> if some part were to be executed, and alert
 a user to that fact.
 However, this does not allow the tool to classify the module as invalid.
- 
+
 Sometimes, SPIR-V refers to the client API to specify what is statically
 valid or dynamically defined for a specific situation, in which case those
 rules come from the client API's execution environment.

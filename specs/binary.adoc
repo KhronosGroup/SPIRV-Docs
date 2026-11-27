@@ -1,5 +1,9 @@
+// Needed for Antora rewrite script to treat file as a page, not a partial
+:antora-page-offset:
+
 [[Binary]]
 == Binary Form
+
 This section contains the exact form for all instructions, starting with the numerical values for all fields. See <<PhysicalLayout, Physical Layout>> for the order words appear in.
 
 

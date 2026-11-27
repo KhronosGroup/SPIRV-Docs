@@ -1,11 +1,103 @@
 // Copyright 2015-2026 The Khronos Group Inc.
 // SPDX-License-Identifier: CC-BY-4.0
 
-// This is the top-level asciidoc file.  Content could appear here, it's
-// just all being included from other places currently.
-include::{specs}/intro.adoc[]
+:main-spec:
+= SPIR-V Specification
+:tmtitle: pass:q,r[^™^]
+:regtitle: pass:q,r[^®^]
+The Khronos{regtitle} SPIR{tmtitle} Working Group
+include::{specs}/auto.version.adoc[]
+include::{specs}/boilerplate.adoc[]
+
+include::{specs}/copyright-spec.adoc[]
 
 // "<<<" means use a page break when going to PDF or printer
+<<<
+[float]
+=== Contributors and Acknowledgments
+
+*Editors*
+
+include::{specs}/auto.intro.author.adoc[]
+
+*Contributors*
+
+[none]
+* Connor Abbott, Intel
+* Ben Ashbaugh, Intel
+* Alexey Bader, Intel
+* Alan Baker, Google
+* Dan Baker, Oxide Games
+* Kenneth Benzie, Codeplay
+* Jeff Bolz, NVIDIA
+* Stuart Brady, Arm
+* Gordon Brown, Codeplay
+* Pat Brown, NVIDIA
+* Nate Cesario, LunarG
+* Diana Po-Yu Chen, MediaTek
+* Stephen Clarke, Imagination
+* Joshua Davis, Unity
+* Hugo Devillers, University of Saarland
+* Patrick Doane, Blizzard Entertainment
+* Alastair Donaldson, Google
+* Yuehai Du, Qualcomm
+* Stefanus Du Toit, Google
+* Faith Ekstrand, Collabora
+* Gregory Fischer, LunarG
+* Theresa Foley, Intel
+* Spencer Fricke, Samsung
+* Ben Gaster, Qualcomm
+* Alexander Galazin, ARM
+* Christopher Gautier, ARM
+* Arcady Goldmints, LunarG
+* Jeremy Hayes, LunarG
+* Tobias Hector, AMD
+* Nicolai Hahnle, AMD
+* Neil Henning, AMD
+* Kerch Holt, NVIDIA
+* Lee Howes, Qualcomm
+* Samuel Huang, Mediatek
+* Marty Johnson, Khronos
+* Roy Ju, MediaTek
+* Baldur Karlsson, Valve
+* Ronan Keryell, Xilinx
+* John Kessenich, Google
+* Wooyoung Kim, Qualcomm
+* Vasileios Klimis, Imperial College London
+* Daniel Koch, NVIDIA
+* Ashwin Kolhe, NVIDIA
+* Tim Kong, Samsung
+* Raun Krisch, Intel
+* Graeme Leese, Broadcom
+* Yuan Lin, NVIDIA
+* Yaxun Liu, AMD
+* Victor Lomuller, Codeplay
+* Timothy Lottes, Epic Games
+* John McDonald, Valve
+* Mariusz Merecki, Intel
+* David Neto, Google
+* Boaz Ouriel, Intel
+* Kevin Petit, Arm
+* Robert Quill, Imagination Technologies
+* Christophe Riccio, Unity
+* Andrew Richards, Codeplay
+* Ian Romanick, Intel
+* Graham Sellers, AMD
+* Simon Waters, Samsung
+* Robert Simpson, Qualcomm
+* Pradyuman Singh, NVIDIA
+* Bartosz Sochacki, Intel
+* Nikos Stavropoulos, Think Silicon
+* Brian Sumner, AMD
+* John Wickerson, Imperial College London
+* Andrew Woloszyn, Google
+* Robin Voetter, StreamHPC
+* Ruihao Zhang, Qualcomm
+* Weifeng Zhang, Qualcomm
+
+<<<
+include::{specs}/intro.adoc[]
+
 <<<
 include::{specs}/specification.adoc[]
 

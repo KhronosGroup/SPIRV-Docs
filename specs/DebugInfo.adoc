@@ -1,6 +1,7 @@
 // Copyright 2015-2026 The Khronos Group Inc.
 // SPDX-License-Identifier: CC-BY-4.0
 
+[[DebugInfo]]
 = Debug Information Extended Instruction Set Specification
 Alexey Sotkin, Intel
 1.00, Revision 1
@@ -85,7 +86,8 @@ must start with _@_ symbol to avoid clashes with user defined names.
 
 == Enumerations
 
-=== Instruction Enumeration [[InstEnum]]
+[[InstEnum]]
+=== Instruction Enumeration
 
 [cols="^1,7",options="header", width="50%"]
 |======
@@ -128,7 +130,8 @@ must start with _@_ symbol to avoid clashes with user defined names.
 |======
 
 
-=== Debug Info Flags [[DebugFlags]]
+[[DebugFlags]]
+=== Debug Info Flags
 
 [cols="^4,8",options="header", width="50%"]
 |======
@@ -151,7 +154,8 @@ must start with _@_ symbol to avoid clashes with user defined names.
 |======
 
 
-=== Base Type Attribute Encodings [[BaseTypeAttributeEncoding]]
+[[BaseTypeAttributeEncoding]]
+=== Base Type Attribute Encodings
 
 Used by <<DebugTypeBasic,*DebugTypeBasic*>> +
 
@@ -168,7 +172,9 @@ Used by <<DebugTypeBasic,*DebugTypeBasic*>> +
 | 8 | *UnsignedChar*
 |======
 
-=== Composite Types [[CompositeTypes]]
+[[CompositeTypes]]
+=== Composite Types
+
 Used by <<DebugTypeComposite,*DebugTypeComposite*>> +
 
 [cols="^1,10",options="header",width = "50%"]
@@ -179,7 +185,9 @@ Used by <<DebugTypeComposite,*DebugTypeComposite*>> +
 | 2 | *Union*
 |======
 
-=== Type Qualifiers [[TypeQualifiers]]
+[[TypeQualifiers]]
+=== Type Qualifiers
+
 Used by <<DebugTypeQualifier,*DebugTypeQualifier*>> +
 
 [cols="^1,10",options="header",width = "50%"]
@@ -191,7 +199,9 @@ Used by <<DebugTypeQualifier,*DebugTypeQualifier*>> +
 |======
 
 
-=== Debug Operations [[Operation]]
+[[Operation]]
+=== Debug Operations
+
 Used by <<DebugExpression,*DebugExpression*>> +
 
 [cols="^1,8,2",options="header",width = "50%"]

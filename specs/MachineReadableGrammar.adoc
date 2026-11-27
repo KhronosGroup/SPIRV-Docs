@@ -3,10 +3,12 @@
 
 = SPIR-V Machine-readable Grammar
 :Author: Lei Zhang, Google
+ifndef::site-gen-antora[]
 :numbered:
 :toc: left
 :toc2:
 :toclevels: 3
+endif::site-gen-antora[]
 
 :source-highlighter: pygments
 
